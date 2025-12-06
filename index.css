@@ -1,0 +1,23 @@
+.hero {
+    background-color: #e9ecef;
+    padding: 2rem;
+    text-align: center;
+}
+.buscar input, .buscar button {
+    padding: 0.5rem;
+    margin: 0.5rem;
+}
+.evento-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+.evento-tarjeta {
+    background: white;
+    border: 1px solid #ddd;
+    padding: 1rem;
+    width: 300px;
+}
+.evento-tarjeta img {
+    width: 100%;
+}
