@@ -1,46 +1,81 @@
+/* --- estilos.css (Base Global) --- */
+
+:root {
+    --primary-color: #6e8efb; /* El azul moderno que usamos */
+    --dark-color: #333;
+    --bg-color: #f4f7f6;
+}
+
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
-    color: #333;
+    background-color: var(--bg-color);
+    color: var(--dark-color);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Asegura que el cuerpo ocupe toda la pantalla */
 }
+
 header {
-    background-color: #007bff;
+    background-color: var(--dark-color);
     color: white;
-    padding: 1rem;
-    text-align: center;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
+
+header h1 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
 nav a {
     color: white;
-    margin: 0 1rem;
+    margin-left: 1.5rem;
     text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
 }
+
+nav a:hover {
+    color: var(--primary-color);
+}
+
 main {
+    flex: 1; /* Esto empuja el footer al final sin tapar el contenido */
     max-width: 1200px;
-    margin: 2rem auto;
-    padding: 1rem;
+    margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
 }
+
 footer {
-    background-color: #333;
+    background-color: var(--dark-color);
     color: white;
     text-align: center;
-    padding: 1rem;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
+    padding: 1.5rem;
+    margin-top: 2rem;
 }
 
 .logo {
-    max-width: 250px; 
+    max-width: 200px;
     height: auto;
     display: block;
-    margin: 0 auto; 
 }
 
+/* Responsivo para móviles */
 @media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        text-align: center;
+    }
+    nav {
+        margin-top: 1rem;
+    }
     nav a {
-        display: block;
-        margin: 0.5rem 0;
+        margin: 0 0.5rem;
     }
 }

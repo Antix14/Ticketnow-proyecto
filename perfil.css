@@ -1,10 +1,116 @@
-ul {
+/* Configuración General */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f7f6;
+    margin: 0;
+    color: #333;
+}
+
+header {
+    background-color: #333;
+    color: white;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 15px;
+    font-weight: 500;
+}
+
+/* Contenedor Principal */
+main {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+h2, h3 {
+    color: #2c3e50;
+}
+
+/* Tarjeta de Información de Usuario */
+.user-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    margin-bottom: 2rem;
+    border-left: 5px solid #6e8efb;
+}
+
+.user-card p {
+    margin: 0.5rem 0;
+    font-size: 1.1rem;
+}
+
+.user-card strong {
+    color: #666;
+    width: 80px;
+    display: inline-block;
+}
+
+/* Listado de Entradas */
+.tickets-list {
     list-style: none;
     padding: 0;
 }
-li {
+
+.ticket-item {
     background: white;
-    padding: 1rem;
-    margin: 0.5rem 0;
-    border: 1px solid #ddd;
+    margin-bottom: 1rem;
+    padding: 1.2rem;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    transition: transform 0.2s;
+}
+
+.ticket-item:hover {
+    transform: scale(1.01);
+}
+
+.ticket-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.ticket-title {
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: #333;
+}
+
+.ticket-date {
+    font-size: 0.9rem;
+    color: #888;
+}
+
+.ticket-qty {
+    background: #eef2ff;
+    color: #6e8efb;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.no-tickets {
+    text-align: center;
+    padding: 2rem;
+    background: #eee;
+    border-radius: 8px;
+    color: #777;
+}
+
+footer {
+    text-align: center;
+    padding: 2rem;
+    color: #888;
 }

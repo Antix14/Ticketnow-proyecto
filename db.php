@@ -1,6 +1,6 @@
 <?php
-$host = "192.168.7.1"; // Cambia esto por la IP real
-$user = "usuario_admin";           // Usuario que creaste en la BD remota
+$host = "192.168.7.1"; 
+$user = "usuario_admin";          
 $pass = "asdf1234";
 $db   = "ticketing";
 

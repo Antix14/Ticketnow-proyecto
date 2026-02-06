@@ -1,43 +1,46 @@
-<?php
-include 'db.php'; // Conectamos a la BD
-
-// lógica de búsqueda si el usuario usó el buscador
-$termino = isset($_GET['buscar']) ? $_GET['buscar'] : '';
-$query = "SELECT * FROM eventos WHERE titulo LIKE '%$termino%'";
-$resultado = mysqli_query($conexion, $query);
+<?php 
+include 'db.php'; 
+$busqueda = isset($_GET['q']) ? mysqli_real_escape_string($conexion, $_GET['q']) : '';
 ?>
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ticketing - Inicio</title>
-    <link rel="stylesheet" href="css/estilos.css">
+    <link rel="stylesheet" href="estilos.css">
+    <link rel="stylesheet" href="index.css"> 
 </head>
 <body>
-    <header>
-        <img src="logo.png" alt="Logo">
-        <nav>...</nav>
+    <header class="buscador">
+        <form action="index.php" method="GET">
+            <input type="text" name="q" placeholder="Busca tu evento..." value="<?php echo htmlspecialchars($busqueda); ?>">
+            <button type="submit">Buscar</button>
+        </form>
     </header>
 
-    <main>
-        <h1>Próximos Eventos</h1>
-        
-        <div class="evento-grid">
-            <?php            
-            // Este bucle "crea" HTML por cada fila de la base de datos
+    <main class="evento-grid">
+        <?php
+        $sql = "SELECT * FROM eventos WHERE titulo LIKE '%$busqueda%' ORDER BY fecha_evento ASC";
+        $resultado = mysqli_query($conexion, $sql);
+
+        if (mysqli_num_rows($resultado) > 0) {
             while($evento = mysqli_fetch_assoc($resultado)) {
-                ?>
-                <div class="evento-tarjeta">
-                    <img src="img/<?php echo $evento['imagen_url']; ?>">
-                    <h3><?php echo $evento['titulo']; ?></h3>
-                    <p><?php echo $evento['precio']; ?>€</p>
-                    <a href="detalles.php?id=<?php echo $evento['id_evento']; ?>">Comprar</a>
-                </div>
-                <?php
-            } 
-            ?>
-        </div>
+                echo "
+                <article class='evento-tarjeta'>
+                    <img src='{$evento['imagen_url']}' alt='{$evento['titulo']}'>
+                    <h3>{$evento['titulo']}</h3>
+                    <p><strong>Fecha:</strong> {$evento['fecha_evento']}</p>
+                    <p><strong>Precio:</strong> {$evento['precio_total']}€</p>
+                    <a href='detalles_evento.php?id={$evento['id_evento']}' class='btn'>
+                    Ver detalles
+                    </a>
+                </article>";
+            }
+        } else {
+            echo "<p style='grid-column: 1/-1; text-align: center;'>No se encontraron eventos.</p>";
+        }
+        ?>
     </main>
 </body>
 </html>
