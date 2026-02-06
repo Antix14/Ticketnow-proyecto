@@ -114,3 +114,31 @@ footer {
     padding: 2rem;
     color: #888;
 }
+
+/* ------------------------------ */
+/* Botón de Eliminar Cuenta */
+.delete-account {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.btn-delete {
+    background-color: #e74c3c; /* rojo intenso para advertencia */
+    color: #fff;
+    border: none;
+    padding: 12px 25px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.btn-delete:hover {
+    background-color: #c0392b; /* rojo más oscuro */
+    transform: scale(1.05);
+}
+
+.btn-delete:active {
+    transform: scale(0.98);
+}

@@ -52,8 +52,10 @@ $res_tickets = mysqli_query($conexion, $query_tickets);
             <p><strong>Email:</strong> <?php echo htmlspecialchars($datos_usuario['email']); ?></p>
         </section>
 
+        <!-- Botón para eliminar cuenta -->
         <section class="delete-account">
-            <form action="eliminar_cuenta.php" method="POST" onsubmit="return confirm('¿Estás seguro de que deseas eliminar tu cuenta? Esta acción no se puede deshacer.')">
+            <form action="eliminar_cuenta.php" method="POST" 
+                  onsubmit="return confirm('¿Estás seguro de que deseas eliminar tu cuenta? Esta acción no se puede deshacer.')">
                 <button type="submit" class="btn-delete">Eliminar mi cuenta</button>
             </form>
         </section>
