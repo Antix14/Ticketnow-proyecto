@@ -9,7 +9,7 @@ if (isset($_POST['btn_guardar'])) {
     $aforo_total = $_POST['aforo_total'];
     $aforo_disponible = $_POST['aforo_disponible'];
     $id_categoria = $_POST['id_categoria'];
-    $imagen_final = "Imagenes/default.jpg";
+    $imagen_final = "Imagenes/logo.png";
 
     if (!empty($_FILES['foto']['name'])) {
     $nombre_archivo = time() . "_" . $_FILES['foto']['name'];
