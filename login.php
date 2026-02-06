@@ -8,7 +8,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = mysqli_real_escape_string($conexion, $_POST['email']);
     $password = $_POST['password'];
 
-    $sql = "SELECT * FROM usuarios WHERE email = '$email'";
+    // Consulta solo usuarios activos (eliminado = 0)
+    $sql = "SELECT * FROM usuarios WHERE email = '$email' AND eliminado = b'0'";
     $resultado = mysqli_query($conexion, $sql);
 
     if (mysqli_num_rows($resultado) > 0) {
@@ -31,7 +32,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $error = "La contraseña introducida no es correcta.";
         }
     } else {
-        $error = "Este correo electrónico no está registrado.";
+        // Aquí puede ser porque el correo no existe o porque la cuenta está eliminada
+        $error = "Este correo electrónico no está registrado o la cuenta ha sido eliminada.";
     }
 }
 ?>
