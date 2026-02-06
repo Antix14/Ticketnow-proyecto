@@ -1,34 +1,58 @@
-/* Configuración General */
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f4f7f6;
-    margin: 0;
-    color: #333;
-}
-
-/* Sección Buscador */
-.buscador {
-    background: linear-gradient(135deg, #6e8efb, #a7a7fd);
-    padding: 3rem 1rem;
-    text-align: center;
-    margin-bottom: 2rem;
+/* --- MENÚ FIJO --- */
+.menu-fijo {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: #6e8efb;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    z-index: 1000;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 
+.menu-fijo .logo a {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.nav-principal a {
+    color: white;
+    text-decoration: none;
+    margin-left: 1.5rem;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.nav-principal a:hover {
+    color: #ffd700;
+}
+
+/* --- BUSCADOR --- */
+.buscador {
+    margin-top: 100px; /* Para que no quede oculto detrás del menú fijo */
+    padding: 2rem 1rem;
+    text-align: center;
+}
+
 .buscador form {
+    display: flex;
+    justify-content: center;
     max-width: 600px;
     margin: 0 auto;
-    display: flex;
     gap: 10px;
 }
 
 .buscador input[type="text"] {
     flex-grow: 1;
     padding: 0.8rem 1rem;
-    border: none;
+    border: 1px solid #ccc;
     border-radius: 25px;
     outline: none;
-    font-size: 1rem;
 }
 
 .buscador button {
@@ -38,15 +62,13 @@ body {
     color: white;
     border-radius: 25px;
     cursor: pointer;
-    font-weight: bold;
-    transition: background 0.3s ease;
 }
 
 .buscador button:hover {
     background-color: #555;
 }
 
-/* Grid de Eventos - Responsivo */
+/* --- GRID DE EVENTOS --- */
 .evento-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -56,15 +78,15 @@ body {
     margin: 0 auto;
 }
 
-/* Tarjeta de Evento */
+/* Tarjetas */
 .evento-tarjeta {
     background: white;
     border-radius: 12px;
-    overflow: hidden; /* Para que la imagen respete las esquinas redondeadas */
+    overflow: hidden;
     box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
     display: flex;
     flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .evento-tarjeta:hover {
@@ -90,7 +112,7 @@ body {
     color: #666;
 }
 
-/* Botón Ver Más */
+/* Botón */
 .btn {
     display: block;
     text-align: center;
@@ -101,7 +123,7 @@ body {
     margin: 1rem;
     border-radius: 8px;
     font-weight: bold;
-    margin-top: auto; /* Empuja el botón siempre al fondo de la tarjeta */
+    margin-top: auto;
     transition: background 0.3s ease;
 }
 
