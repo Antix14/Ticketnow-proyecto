@@ -12,6 +12,7 @@ if (isset($_POST['btn_guardar'])) {
     $precio = $_POST['precio'];
     $fecha  = $_POST['fecha'];
     $hora = $_POST['hora'];
+    $ubicacion = mysqli_real_escape_string($conexion, $_POST['ubicacion']);
     $aforo_total = $_POST['aforo_total'];
     $aforo_disponible = $_POST['aforo_disponible'];
     $id_categoria = $_POST['id_categoria'];
@@ -39,14 +40,15 @@ if (isset($_POST['btn_guardar'])) {
 
     // Insertar evento
     $sql = "INSERT INTO eventos 
-            (titulo, precio_total, fecha_evento, hora_evento, imagen_url, aforo_total, aforo_disponible, id_categoria)
-            VALUES 
-            ('$titulo', '$precio', '$fecha', '$hora', '$imagen_final', '$aforo_total', '$aforo_disponible', '$id_categoria')";
+        (titulo, precio_total, fecha_evento, hora_evento, ubicacion, imagen_url, aforo_total, aforo_disponible, id_categoria)
+        VALUES 
+        ('$titulo', '$precio', '$fecha', '$hora', '$ubicacion', '$imagen_final', '$aforo_total', '$aforo_disponible', '$id_categoria')";
 
     if (mysqli_query($conexion, $sql)) {
-        echo "<script>alert('Evento guardado con éxito'); window.location='admin.php';</script>";
+    echo "<script>alert('Evento guardado con éxito'); window.location='admin.php';</script>";
     } else {
-        echo "Error al guardar evento: " . mysqli_error($conexion);
+    // ESTO te dirá el error exacto de MySQL
+    die("Error en SQL: " . mysqli_error($conexion) . "<br>Consulta: " . $sql);
     }
 }
 ?>
@@ -68,6 +70,8 @@ if (isset($_POST['btn_guardar'])) {
             <input type="number" step="0.01" name="precio" placeholder="Precio (€)" required>
             <input type="date" name="fecha" required>
             <input type="time" name="hora" required>
+            <!-- UBICACIÓN -->
+            <input type="text" name="ubicacion" placeholder="Ubicación del evento" required>
             <input type="number" name="aforo_total" placeholder="Aforo total" required>
             <input type="number" name="aforo_disponible" placeholder="Aforo disponible" required>
 
