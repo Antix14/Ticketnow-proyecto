@@ -1,8 +1,4 @@
 <?php
-// 1. Ver errores (Quitar esto cuando la web sea pública)
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
-
 include 'db.php';
 
 // Verificar conexión
@@ -44,7 +40,7 @@ if (isset($_POST['btn_guardar'])) {
 
     // Consulta con nombres de columna revisados
     $sql = "INSERT INTO eventos 
-            (titulo, precio_total, fecha_evento, hora_evento, ubicacion, imagen_url, aforo_total, aforo_disponible, id_categoria)
+            (titulo, precio, fecha_evento, hora_evento, ubicacion, imagen_url, aforo_total, aforo_disponible, id_categoria)
             VALUES 
             ('$titulo', '$precio', '$fecha', '$hora', '$ubicacion', '$imagen_final', '$aforo_total', '$aforo_disponible', '$id_categoria')";
 
