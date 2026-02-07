@@ -1,6 +1,13 @@
 <?php
 include 'db.php';
+session_start();
 
+
+if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'admin') {
+    // Redirige al inicio si no es admin
+    header("Location: index.php");
+    exit();
+}
 // Verificar conexión
 if (!$conexion) {
     die("Error de conexión: " . mysqli_connect_error());
