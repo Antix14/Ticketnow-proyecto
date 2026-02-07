@@ -2,13 +2,11 @@
 include 'db.php';
 session_start();
 
-
 if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'admin') {
-    // Redirige al inicio si no es admin
     header("Location: index.php");
     exit();
 }
-// Verificar conexión
+
 if (!$conexion) {
     die("Error de conexión: " . mysqli_connect_error());
 }
@@ -16,6 +14,7 @@ if (!$conexion) {
 /* Cargar categorías */
 $categorias = mysqli_query($conexion, "SELECT id_categoria, nombre_categoria FROM categorias");
 
+/* --- LÓGICA DE GUARDADO (Mantenida igual) --- */
 if (isset($_POST['btn_guardar'])) {
     $titulo = mysqli_real_escape_string($conexion, $_POST['titulo']);
     $precio = $_POST['precio'];
@@ -31,21 +30,17 @@ if (isset($_POST['btn_guardar'])) {
     if (!empty($_FILES['foto']['name'])) {
         $archivo = $_FILES['foto'];
         if ($archivo['error'] === 0) {
-            // Asegurarnos de que la carpeta existe
             if (!is_dir('Imagenes')) {
                 mkdir('Imagenes', 0777, true);
             }
-            
             $nombre_archivo = time() . "_" . basename($archivo['name']);
             $ruta_destino = "Imagenes/" . $nombre_archivo;
-
             if (move_uploaded_file($archivo['tmp_name'], $ruta_destino)) {
                 $imagen_final = $ruta_destino;
             }
         }
     }
 
-    // Consulta con nombres de columna revisados
     $sql = "INSERT INTO eventos 
             (titulo, precio, fecha_evento, hora_evento, ubicacion, imagen_url, aforo_total, aforo_disponible, id_categoria)
             VALUES 
@@ -54,17 +49,19 @@ if (isset($_POST['btn_guardar'])) {
     if (mysqli_query($conexion, $sql)) {
         echo "<script>alert('Evento guardado con éxito'); window.location='admin.php';</script>";
     } else {
-        // Esto nos dirá el error exacto si la tabla está mal
         die("Error en la base de datos: " . mysqli_error($conexion));
     }
 }
+
+/* CARGAR EVENTOS PARA EL LISTADO */
+$lista_eventos = mysqli_query($conexion, "SELECT id_evento, titulo, fecha_evento, ubicacion FROM eventos ORDER BY fecha_evento DESC");
 ?>
 
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Admin - Añadir Evento</title>
+    <title>Admin - Gestión de Eventos</title>
     <link rel="stylesheet" href="estilos.css">
     <link rel="stylesheet" href="admin.css">
 </head>
@@ -77,24 +74,17 @@ if (isset($_POST['btn_guardar'])) {
             <input type="number" step="0.01" name="precio" placeholder="Precio (€)" required>
             <input type="date" name="fecha" required>
             <input type="time" name="hora" required>
-            <!-- UBICACIÓN -->
             <input type="text" name="ubicacion" placeholder="Ubicación del evento" required>
             <input type="number" name="aforo_total" placeholder="Aforo total" required>
             <input type="number" name="aforo_disponible" placeholder="Aforo disponible" required>
 
-            <!-- SELECT DE CATEGORÍAS DESDE BD -->
             <select name="id_categoria" required>
                 <option value="">Selecciona categoría</option>
-
                 <?php
                 if ($categorias && mysqli_num_rows($categorias) > 0) {
                     while ($cat = mysqli_fetch_assoc($categorias)) {
-                        echo "<option value='{$cat['id_categoria']}'>
-                                {$cat['nombre_categoria']}
-                              </option>";
+                        echo "<option value='{$cat['id_categoria']}'>{$cat['nombre_categoria']}</option>";
                     }
-                } else {
-                    echo "<option value=''>No hay categorías creadas</option>";
                 }
                 ?>
             </select>
@@ -105,10 +95,36 @@ if (isset($_POST['btn_guardar'])) {
                 <input type="file" id="foto" name="foto" accept="image/*">
             </div>
 
-            <button type="submit" name="btn_guardar" class="btn-principal">
-                Publicar Evento
-            </button>
+            <button type="submit" name="btn_guardar" class="btn-principal">Publicar Evento</button>
         </form>
+
+        <hr>
+
+        <h2>Eventos Publicados</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Título</th>
+                    <th>Fecha</th>
+                    <th>Acción</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php while ($ev = mysqli_fetch_assoc($lista_eventos)): ?>
+                <tr>
+                    <td><?php echo $ev['titulo']; ?></td>
+                    <td><?php echo $ev['fecha_evento']; ?></td>
+                    <td>
+                        <a href="eliminar.php?id=<?php echo $ev['id_evento']; ?>" 
+                           class="btn-eliminar" 
+                           onclick="return confirm('¿Estás seguro de eliminar este evento?');">
+                           Eliminar
+                        </a>
+                    </td>
+                </tr>
+                <?php endwhile; ?>
+            </tbody>
+        </table>
     </div>
 </body>
 </html>
