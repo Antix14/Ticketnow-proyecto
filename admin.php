@@ -1,11 +1,17 @@
 <?php
+// 1. Ver errores (Quitar esto cuando la web sea pública)
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+
 include 'db.php';
 
-/* Cargar categorías desde la base de datos */
-$categorias = mysqli_query(
-    $conexion,
-    "SELECT id_categoria, nombre_categoria FROM categorias"
-);
+// Verificar conexión
+if (!$conexion) {
+    die("Error de conexión: " . mysqli_connect_error());
+}
+
+/* Cargar categorías */
+$categorias = mysqli_query($conexion, "SELECT id_categoria, nombre_categoria FROM categorias");
 
 if (isset($_POST['btn_guardar'])) {
     $titulo = mysqli_real_escape_string($conexion, $_POST['titulo']);
@@ -17,38 +23,36 @@ if (isset($_POST['btn_guardar'])) {
     $aforo_disponible = $_POST['aforo_disponible'];
     $id_categoria = $_POST['id_categoria'];
 
-    // Imagen por defecto
-    $imagen_final = "Imagenes/logo.png";
+    $imagen_final = "Imagenes/logo.png"; 
 
-    // Procesar subida de imagen
     if (!empty($_FILES['foto']['name'])) {
         $archivo = $_FILES['foto'];
-
         if ($archivo['error'] === 0) {
-            $tipos_permitidos = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
+            // Asegurarnos de que la carpeta existe
+            if (!is_dir('Imagenes')) {
+                mkdir('Imagenes', 0777, true);
+            }
+            
+            $nombre_archivo = time() . "_" . basename($archivo['name']);
+            $ruta_destino = "Imagenes/" . $nombre_archivo;
 
-            if (in_array($archivo['type'], $tipos_permitidos)) {
-                $nombre_archivo = time() . "_" . preg_replace('/[^a-zA-Z0-9\._-]/', '', $archivo['name']);
-                $ruta_destino = "Imagenes/" . $nombre_archivo;
-
-                if (move_uploaded_file($archivo['tmp_name'], $ruta_destino)) {
-                    $imagen_final = $ruta_destino;
-                }
+            if (move_uploaded_file($archivo['tmp_name'], $ruta_destino)) {
+                $imagen_final = $ruta_destino;
             }
         }
     }
 
-    // Insertar evento
+    // Consulta con nombres de columna revisados
     $sql = "INSERT INTO eventos 
-        (titulo, precio_total, fecha_evento, hora_evento, ubicacion, imagen_url, aforo_total, aforo_disponible, id_categoria)
-        VALUES 
-        ('$titulo', '$precio', '$fecha', '$hora', '$ubicacion', '$imagen_final', '$aforo_total', '$aforo_disponible', '$id_categoria')";
+            (titulo, precio_total, fecha_evento, hora_evento, ubicacion, imagen_url, aforo_total, aforo_disponible, id_categoria)
+            VALUES 
+            ('$titulo', '$precio', '$fecha', '$hora', '$ubicacion', '$imagen_final', '$aforo_total', '$aforo_disponible', '$id_categoria')";
 
     if (mysqli_query($conexion, $sql)) {
-    echo "<script>alert('Evento guardado con éxito'); window.location='admin.php';</script>";
+        echo "<script>alert('Evento guardado con éxito'); window.location='admin.php';</script>";
     } else {
-    // ESTO te dirá el error exacto de MySQL
-    die("Error en SQL: " . mysqli_error($conexion) . "<br>Consulta: " . $sql);
+        // Esto nos dirá el error exacto si la tabla está mal
+        die("Error en la base de datos: " . mysqli_error($conexion));
     }
 }
 ?>
