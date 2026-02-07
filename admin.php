@@ -67,6 +67,11 @@ $lista_eventos = mysqli_query($conexion, "SELECT id_evento, titulo, fecha_evento
 </head>
 <body>
     <div class="panel-container">
+        <div class="admin-nav">
+            <a href="index.php" class="btn-secundario">Ir al Inicio</a>
+            <a href="logout.php" class="btn-secundario">Cerrar Sesión</a>
+        </div>
+
         <h2>Añadir Nuevo Evento</h2>
 
         <form method="POST" enctype="multipart/form-data" class="admin-form">
@@ -101,30 +106,34 @@ $lista_eventos = mysqli_query($conexion, "SELECT id_evento, titulo, fecha_evento
         <hr>
 
         <h2>Eventos Publicados</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Título</th>
-                    <th>Fecha</th>
-                    <th>Acción</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php while ($ev = mysqli_fetch_assoc($lista_eventos)): ?>
-                <tr>
-                    <td><?php echo $ev['titulo']; ?></td>
-                    <td><?php echo $ev['fecha_evento']; ?></td>
-                    <td>
-                        <a href="eliminar.php?id=<?php echo $ev['id_evento']; ?>" 
-                           class="btn-eliminar" 
-                           onclick="return confirm('¿Estás seguro de eliminar este evento?');">
-                           Eliminar
-                        </a>
-                    </td>
-                </tr>
-                <?php endwhile; ?>
-            </tbody>
-        </table>
+        <?php if ($lista_eventos && mysqli_num_rows($lista_eventos) > 0): ?>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Título</th>
+                        <th>Fecha</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php while ($ev = mysqli_fetch_assoc($lista_eventos)): ?>
+                    <tr>
+                        <td><?php echo $ev['titulo']; ?></td>
+                        <td><?php echo $ev['fecha_evento']; ?></td>
+                        <td>
+                            <a href="eliminar.php?id=<?php echo $ev['id_evento']; ?>" 
+                               class="btn-eliminar" 
+                               onclick="return confirm('¿Estás seguro de eliminar este evento?');">
+                               Eliminar
+                            </a>
+                        </td>
+                    </tr>
+                    <?php endwhile; ?>
+                </tbody>
+            </table>
+        <?php else: ?>
+            <p>No hay eventos publicados todavía.</p>
+        <?php endif; ?>
     </div>
 </body>
 </html>

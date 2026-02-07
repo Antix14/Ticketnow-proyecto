@@ -130,3 +130,25 @@
 .btn:hover {
     background-color: #5a7be0;
 }
+
+/* Botones secundarios en el panel de admin */
+.admin-nav {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.btn-secundario {
+    background-color: #6e8efb;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.btn-secundario:hover {
+    background-color: #5a7be0;
+}

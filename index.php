@@ -25,6 +25,9 @@ $busqueda = isset($_GET['q']) ? mysqli_real_escape_string($conexion, $_GET['q'])
             <a href="index.php">Explorar Eventos</a>
 
             <?php if(isset($_SESSION['usuario_id'])): ?>
+                <?php if(isset($_SESSION['rol']) && $_SESSION['rol'] === 'admin'): ?>
+                    <a href="admin.php">Panel de Admin</a>
+                <?php endif; ?>
                 <a href="perfil.php">Mi perfil</a>
                 <a href="logout.php">Cerrar sesión</a>
             <?php else: ?>
