@@ -51,7 +51,7 @@ if (isset($_GET['id'])) {
             <?php echo nl2br(htmlspecialchars($evento['descripcion'] ?? 'Sin descripción disponible.')); ?></p>
 
             <div class="precio-destacado" style="padding: 0.5rem 2rem; font-size: 1.5rem; font-weight: bold; color: #333;">
-                <?php echo number_format($evento['precio_total'], 2); ?>€ <small style="font-size: 0.8rem; color: #777;">/ entrada</small>
+                <?php echo number_format($evento['precio'], 2); ?>€ <small style="font-size: 0.8rem; color: #777;">/ entrada</small>
             </div>
 
             <form class="comprar" action="procesar_compra.php" method="POST">

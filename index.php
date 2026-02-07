@@ -57,7 +57,7 @@ $busqueda = isset($_GET['q']) ? mysqli_real_escape_string($conexion, $_GET['q'])
                     <img src='{$evento['imagen_url']}' alt='{$evento['titulo']}'>
                     <h3>{$evento['titulo']}</h3>
                     <p><strong>Fecha:</strong> {$evento['fecha_evento']}</p>
-                    <p><strong>Precio:</strong> ".number_format($evento['precio_total'],2)."€</p>
+                    <p><strong>Precio:</strong> ".number_format($evento['precio'],2)."€</p>
                     <a href='detalles_evento.php?id={$evento['id_evento']}' class='btn'>Ver detalles</a>
                 </article>";
             }
