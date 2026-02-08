@@ -46,9 +46,7 @@ if (isset($_GET['id'])) {
             <h2><?php echo htmlspecialchars($evento['titulo']); ?></h2>
             <p><strong>Fecha:</strong> <?php echo $evento['fecha_evento']; ?></p>
             <p><strong>Ubicación:</strong> <?php echo $evento['ubicacion'] ?? 'Consultar recinto'; ?></p>
-            <p><strong>Aforo Disponible:</strong> <?php echo $evento['aforo_disponible']; ?> personas</p>
-            <p><strong>Descripción:</strong><br>
-            <?php echo nl2br(htmlspecialchars($evento['descripcion'] ?? 'Sin descripción disponible.')); ?></p>
+            <p><strong>Aforo Disponible:</strong> <?php echo $evento['aforo_disponible']; ?> personas</p>          
 
             <div class="precio-destacado" style="padding: 0.5rem 2rem; font-size: 1.5rem; font-weight: bold; color: #333;">
                 <?php echo number_format($evento['precio'], 2); ?>€ <small style="font-size: 0.8rem; color: #777;">/ entrada</small>
