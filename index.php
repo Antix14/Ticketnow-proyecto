@@ -22,7 +22,7 @@ $busqueda = isset($_GET['q']) ? mysqli_real_escape_string($conexion, $_GET['q'])
         </div>
         <nav class="nav-principal">
             <a href="index.php">Inicio</a>
-            <a href="index.php">Explorar Eventos</a>
+            <a href="explorar_eventos.php">Explorar Eventos</a>
 
             <?php if(isset($_SESSION['usuario_id'])): ?>
                 <?php if(isset($_SESSION['rol']) && $_SESSION['rol'] === 'admin'): ?>
