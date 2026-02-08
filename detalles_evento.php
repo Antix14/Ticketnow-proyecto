@@ -45,6 +45,7 @@ if (isset($_GET['id'])) {
 
             <h2><?php echo htmlspecialchars($evento['titulo']); ?></h2>
             <p><strong>Fecha:</strong> <?php echo $evento['fecha_evento']; ?></p>
+            <p><strong>Hora:</strong> <?php echo date('H:i', strtotime($evento['hora_evento'])); ?></p>
             <p><strong>Ubicación:</strong> <?php echo $evento['ubicacion'] ?? 'Consultar recinto'; ?></p>
             <p><strong>Aforo Disponible:</strong> <?php echo $evento['aforo_disponible']; ?> personas</p>          
 
