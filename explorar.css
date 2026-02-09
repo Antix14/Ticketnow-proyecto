@@ -1,25 +1,38 @@
-/* explorar.css - Botones de categoría */
-.categorias a {
+/* --- SECCIÓN EXPLORAR --- */
+.seccion-explorar {
+    margin-top: 100px; /* Margen para evitar el menú fijo */
+    padding: 2rem;
+    text-align: center;
+}
+
+.contenedor-categorias {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.cat-btn {
     display: inline-block;
-    padding: 0.5rem 1rem;
-    margin: 0.2rem;
-    border-radius: 20px;
-    background-color: #e0e4ff;
-    color: #333;
+    padding: 0.7rem 1.5rem;
+    border-radius: 25px;
+    background-color: white;
+    color: #6e8efb;
     font-weight: bold;
     text-decoration: none;
     transition: all 0.3s ease;
-    border: 2px solid transparent;
+    border: 2px solid #6e8efb;
 }
 
-.categorias a:hover {
+.cat-btn:hover, .cat-btn.activa {
     background-color: #6e8efb;
     color: white;
-    border-color: #5a7be0;
+    box-shadow: 0 4px 10px rgba(110, 142, 251, 0.3);
 }
 
-.categorias a.activa {
-    background-color: #6e8efb;
-    color: white;
-    border-color: #5a7be0;
+/* Ajuste del grid para que no esté pegado a las categorías */
+.evento-grid {
+    padding-top: 1rem;
 }
