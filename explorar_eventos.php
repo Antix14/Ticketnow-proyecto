@@ -17,7 +17,7 @@ $categoria = isset($_GET['categoria']) ? (int)$_GET['categoria'] : 0;
     <title>TicketNow - Explorar Eventos</title>
     <link rel="stylesheet" href="estilos.css">
     <link rel="stylesheet" href="index.css">
-    <link rel="stylesheet" href="explorar_eventos.css">
+    <link rel="stylesheet" href="explorar.css">
 </head>
 <body>
 

@@ -1,65 +1,25 @@
-/* --- EXPLORAR EVENTOS (categorías y filtros) --- */
-
-/* Contenedor de categorías */
-.categorias {
-    margin-top: 110px; /* separa del menú fijo */
-    padding: 1.5rem 2rem;
-    display: flex;
-    justify-content: center;
-    gap: 12px;
-    flex-wrap: wrap;
-    max-width: 1200px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-/* Botones de categoría */
+/* explorar.css - Botones de categoría */
 .categorias a {
-    padding: 10px 18px;
-    border-radius: 25px;
-    background-color: #e9ecf1;
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    margin: 0.2rem;
+    border-radius: 20px;
+    background-color: #e0e4ff;
     color: #333;
+    font-weight: bold;
     text-decoration: none;
-    font-weight: 600;
-    font-size: 0.95rem;
     transition: all 0.3s ease;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    border: 2px solid transparent;
 }
 
-/* Hover */
 .categorias a:hover {
     background-color: #6e8efb;
     color: white;
-    transform: translateY(-2px);
+    border-color: #5a7be0;
 }
 
-/* Categoría activa */
 .categorias a.activa {
     background-color: #6e8efb;
     color: white;
-    box-shadow: 0 4px 12px rgba(110, 142, 251, 0.4);
-}
-
-/* Ajuste del grid para que no quede pegado */
-.evento-grid {
-    padding-top: 1rem;
-}
-
-/* Mensaje cuando no hay eventos */
-.evento-grid p {
-    font-size: 1.1rem;
-    color: #666;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-    .categorias {
-        padding: 1rem;
-        gap: 8px;
-    }
-
-    .categorias a {
-        padding: 8px 14px;
-        font-size: 0.85rem;
-    }
+    border-color: #5a7be0;
 }
