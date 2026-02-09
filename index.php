@@ -50,7 +50,8 @@ $busqueda = isset($_GET['q']) ? mysqli_real_escape_string($conexion, $_GET['q'])
         <?php
         $sql_eventos = "SELECT * FROM eventos 
                         WHERE titulo LIKE '%$busqueda%' 
-                        ORDER BY fecha_evento ASC";
+                        ORDER BY fecha_evento ASC
+                        LIMIT 3";
         $res_eventos = mysqli_query($conexion, $sql_eventos);
 
         if(mysqli_num_rows($res_eventos) > 0){
